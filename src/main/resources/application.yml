@@ -1,0 +1,96 @@
+spring:
+  application:
+    name: spring-security
+  main:
+    banner-mode: 'off'
+  profiles:
+    active: local
+    include:
+      - keycloak
+  jmx:
+    enabled: true
+  config:
+    use-legacy-processing: true
+  cloud:
+    bootstrap:
+      enabled: true
+    loadbalancer:
+      ribbon:
+        enabled: false
+  jpa:
+    database: default
+    database-platform: org.hibernate.dialect.Oracle12cDialect
+    open-in-view: false
+    properties:
+      hibernate:
+        jdbc:
+          use_get_generated_keys: true
+          use_scrollable_resultset: true
+        temp:
+          use_jdbc_metadata_defaults: false
+      javax:
+        persistence:
+          query:
+            timeout: 5000
+
+server:
+  tomcat:
+    threads:
+      max: 200
+      min-spare: 25
+    remoteip:
+      remote-ip-header: X-forwarded-For
+      host-header: X-Forwarded-Host
+      port-header: X-Forwarded-Port
+    mbeanregistry:
+      enabled: true
+
+thread-executor:
+  core-pool-size: 50
+  max-pool-size: 200
+  keep-alive-seconds: 60
+  queue-capacity: 200
+  scheduler:
+    core-pool-size: 5
+
+management:
+  health:
+    ldap:
+      enabled: false
+  endpoints:
+    enabled-by-default: true
+    web:
+      exposure:
+        include: "*"
+      cors:
+        allowed-origins: "*"
+        allowed-methods: GET,HEAD,POST,DELETE,OPTIONS
+    jmx:
+      exposure:
+        include: "*"
+  endpoint:
+    env:
+      post:
+        enabled: true
+    health:
+      show-details: ALWAYS
+  server:
+    ssl:
+      enabled: false
+  metrics:
+    use-global-registry: true
+    tags:
+      application: ${spring.application.name}
+    export:
+      prometheus:
+        enabled: true
+      jmx:
+        domain: br.com.moreirallan.spring.security
+    web:
+      server:
+        auto-time-requests: true
+        requests-metric-name: http.server.requests
+        request:
+          metric-name: http.server.requests
+          autotime:
+            enabled: true

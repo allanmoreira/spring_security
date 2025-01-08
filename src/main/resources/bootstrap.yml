@@ -1,0 +1,33 @@
+server:
+  port: 8080
+
+management:
+  security:
+    enabled: true
+  endpoints:
+    web:
+      exposure:
+        include:
+          - info
+  endpoint:
+    health:
+      show-details: always
+
+spring:
+  application:
+    name: spring_security
+
+ribbon:
+  ConnectTimeout: 3000
+  ReadTimeout: 30000
+  maxAutoRetries: 0
+  maxAutoRetriesNextServer: 1
+
+# logging
+logging:
+  level:
+    root: INFO
+  file:
+    name: logs/application/application.log
+    max-history: 7
+    max-size: 20MB
