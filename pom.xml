@@ -13,7 +13,7 @@
     <groupId>org.example</groupId>
     <artifactId>spring_security</artifactId>
     <version>1.0-SNAPSHOT</version>
-    <name>Spring Security</name>
+    <name>spring_security</name>
 
     <properties>
         <maven.compiler.source>21</maven.compiler.source>
